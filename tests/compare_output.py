@@ -1,5 +1,5 @@
 # Portable Python script for numerical output file comparisons of MOPAC
-# Argument list: <output file #1> <output file #2>
+# Argument list: <output file #1> <output file #2> <optional: threshold for diff. in heat of formation>
 
 from shutil import copyfile
 from sys import argv
@@ -271,5 +271,11 @@ if __name__ == "__main__":
     ref_line, ref_list = parse_mopac_out_file(argv[1])
     out_line, out_list = parse_mopac_out_file(argv[2])
 
+    # Heat-of-formation threshold is optional 3rd argument. Default is 0.01
+    try:
+        hof = argv[3]
+    except IndexError:
+        hof = 0.01
+
     # Run the comparison
-    compare_mopac_out_file(out_line, out_list, ref_line, ref_list)
+    compare_mopac_out_file(out_line, out_list, ref_line, ref_list, hof)
