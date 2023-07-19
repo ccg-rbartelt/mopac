@@ -273,7 +273,7 @@ if __name__ == "__main__":
 
     # Heat-of-formation threshold is optional 3rd argument. Default is 0.01
     try:
-        hof = argv[3]
+        hof = float(argv[3])
     except IndexError:
         hof = 0.01
 
